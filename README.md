@@ -3,6 +3,11 @@
 
 MIDTERM REPORT 
 
+<img width="1272" alt="Screenshot 2024-04-02 at 10 48 00 PM" src="https://github.com/vinwu2/ml-group45-sp2024/assets/161073357/4cabbadc-39c7-4caa-9469-d30dddf93586">
+
+<img width="674" alt="Screenshot 2024-04-02 at 10 48 39 PM" src="https://github.com/vinwu2/ml-group45-sp2024/assets/161073357/17c89ec1-d4c6-471f-bc48-8c6b6c57ed77">
+
+
 Section 1: Introduction/Background
 Several studies have experimented with using machine learning to make more accurate NBA predictions regarding sports betting. [2] uses a probabilistic model with data on individual player’s history to calculate expected points per possession. However, most studies use team-level statistics. [3] was able to achieve an overall 70% accuracy with linear regression, logistic regression, support vector machines, and artificial neural networks using team-level data, with models that combined predictions from multiple sources producing the best results. [1] combined team-level statistics with clustering analysis of players based on playing style to achieve over 70% prediction accuracy. Consequently, based on these results, we aimed to refine our model to focus on forecasting the spread for NBA games. The term spread simply refers to placing a bet on the total projected points contributed by both teams given a line. Oftentimes, users can choose to bet “over” or “under” the projected point total. As this value is binary, we believed that analyzing historical team-data would produce more consistent results, thus allowing our model to have higher accuracy. Some of the different factors we have to take into account for this model include: home versus away performance, head-to-head matchups, win-loss records, and player injuries. We intend to constrict our data to the most recent 2-3 years to accommodate roster modifications and performance trends with the current coaching staff. 
 
