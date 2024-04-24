@@ -5,31 +5,34 @@ Final Report
 
 <img width="1272" alt="Screenshot 2024-04-02 at 10 48 00 PM" src="https://github.com/vinwu2/ml-group45-sp2024/assets/161073357/4cabbadc-39c7-4caa-9469-d30dddf93586">
 
-<img width="674" alt="Screenshot 2024-04-02 at 10 48 39 PM" src="https://github.com/vinwu2/ml-group45-sp2024/assets/161073357/17c89ec1-d4c6-471f-bc48-8c6b6c57ed77">
+![image](https://github.com/yolanda-y-li/ml-page.github.io/assets/69774970/cf2849cd-92ab-4bb3-b569-84d95c67a63c)
+
 
 
 Section 1: Introduction/Background
+Several studies have experimented with using machine learning to make more accurate NBA predictions regarding sports betting. [2] uses a probabilistic model with data on individual player’s history to calculate expected points per possession. However, through further analysis, we concluded that most studies use team-level statistics. [3] was able to achieve an overall 70% accuracy with linear regression, logistic regression, support vector machines, and artificial neural networks using team-level data, with models that combined predictions from multiple sources producing the best results. [1] combined team-level statistics with clustering analysis of players based on playing style to achieve over 70% prediction accuracy. Consequently, based on these results, we aimed to refine our model from the project midterm to focus on predicting the point total for individual NBA games. Oftentimes, users can choose to bet over or under the projected point total. As this value is binary, we believed that analyzing historical team-data would produce more consistent results, thus allowing our model to have greater accuracy. Some of the different factors we have to take into account for this model include: home versus away performance, head-to-head matchups, win-loss records, and player injuries. We intend to constrict our data to the most recent 2-3 years to accommodate roster modifications and performance trends with the current coaching and front office personnel. 
+	However, the most robust preprocessed data we found was data which was from the 2012-2021 NBA seasons. Since there are many features being calculated, we wanted to account for this by including more sample data for the SVM we run in our third supervised algorithm. This amounts to about 7600 NBA games spanning this period. This dataset was processed to include information available for a next-game forecast, meaning the previous 7 day rolling averages were calculated for each team on each date in this time span. Because some of these features are more correlated, an SVM model is a good choice because it can handle these linear and non-linear irregularities.
 
-Several studies have experimented with using machine learning to make more accurate NBA predictions regarding sports betting. [2] uses a probabilistic model with data on individual player’s history to calculate expected points per possession. However, most studies use team-level statistics. [3] was able to achieve an overall 70% accuracy with linear regression, logistic regression, support vector machines, and artificial neural networks using team-level data, with models that combined predictions from multiple sources producing the best results. [1] combined team-level statistics with clustering analysis of players based on playing style to achieve over 70% prediction accuracy. Consequently, based on these results, we aimed to refine our model to focus on forecasting the spread for NBA games. The term spread simply refers to placing a bet on the total projected points contributed by both teams given a line. Oftentimes, users can choose to bet “over” or “under” the projected point total. As this value is binary, we believed that analyzing historical team-data would produce more consistent results, thus allowing our model to have higher accuracy. Some of the different factors we have to take into account for this model include: home versus away performance, head-to-head matchups, win-loss records, and player injuries. We intend to constrict our data to the most recent 2-3 years to accommodate roster modifications and performance trends with the current coaching staff. 
+Information Regarding Datasets:
 
-Dataset Information:
-
-Home vs Away Data, Points Per Game, Rebounds Per Game, Shot Percentage, Assists, Game Records: https://www.kaggle.com/datasets/nathanlauga/nba-games
-
-Individual Player Data: https://www.kaggle.com/datasets/justinas/nba-players-data/data
-
-Team Records: https://data.world/gmoney/nba-team-records-by-year
-
-Current Player Injuries: https://www.kaggle.com/datasets/ghopkins/nba-injuries-2010-2018
-
-NBA Team Level Statistics (FG%, 3P%, FT%, ORB, DRB, AST, STL, TOV, BLK) Rankings per Season Summary: https://www.basketball-reference.com/leagues/NBA_2023.html
+General Overview of Home vs Away Data 
+Contains information for all 30 teams using a Team ID, as well as a individual Game ID for every game each team experienced between the 2004 season to now
+Provides team-level statistics such as number of points scored at home/away, free throw percentage at home/away games, as well as number of assists and rebounds
+Includes advanced individual player statistics including points per game, rebounds per game, shot percentage, and number of assists for players on each team
+Individual Player Data
+Contains data including height, weight, and college of players between 1996-2021 season
+Additional information such as what pick the player was drafted as and their country of origin are included as well
+Team Records
+Provides a record of all 30 team’s winning percentage and record throughout each season
+Listed per season outcome in chronological order, and organized alphabetically by team
+NBA Team Level Statistics 
+Using field goal percentage, 3-point percentage, free throw percentage, number of offensive/defensive rebounds, assists, steals, turnover, and blocks, this dataset ranks the NBA teams based off their performance in such categories
+Provides a wide range of statistics depending on conditions such as: per game stats, total stats, per 100 possessions stats, shooting stats, and advanced stats 
+Includes the conference and division standings per season as well as award winners
 
 Section 2: Problem and Motivation
-
-The amount of uncertainty involved in NBA games makes betting outcomes difficult to predict. We noted that individual player betting propositions are influenced by many factors: performance, subtle injuries, location, psychological state, etc., which are often hard to reliably predict as there is very limited public data. Additionally, less implicit features, such as back-to-back games, travel distance, and specific matchups all impact player performance which can produce inconsistent results. It is also important to note that sports betting applications are volatile in the sense that odds change quickly throughout the day as they adjust to incorporate new information. This leaves very limited opportunities to place a high value bet on an individual player. Due to these reasons, our group decided to redirect our focus on team-level betting, as there are less variables to account for. 
-
-Our motivation is to enhance the accuracy of NBA betting predictions. Using historical data and machine learning models, we aim to predict individual game outcomes with relatively high accuracy. In return, individuals may potentially witness financial rewards. In cases where our machine learning model predicts the underdog to win, the payout for betting on the underdog team will increase. Moreover, many people enjoy sports betting due to the additional thrill and engagement it adds when watching a game. Betting on the spread is relatively straightforward and adds an extra layer of interest for users.
-
+	The amount of uncertainty involved in NBA games makes betting outcomes difficult to predict. We noted that individual player betting propositions are influenced by many factors: performance, subtle injuries, location, psychological state, etc., which are often hard to reliably predict as there is very limited public data. Additionally, less implicit features, such as back-to-back games, travel distance, and specific matchups all impact player performance which can produce inconsistent results over time. Additionally, it is also important to note that sports betting applications are highly volatile. This means that odds change quickly throughout the day as the application adjusts to incorporate new information. This leaves very limited opportunities to place a high value bet on an individual player. Due to these circumstances, our group decided to redirect our focus to team-level betting, as there are less variables to account for which can produce more accurate results. 
+Our primary motivation is to enhance the accuracy of NBA betting predictions. Our project is oriented on determining whether we will go over or under the projected point total (which we will refer to as the “over-under”). Through utilizing historically available data and machine learning models, we aim to predict individual game outcomes with relatively high accuracy. In return, individuals may potentially witness financial rewards. In cases where our machine learning model anticipates that the less favored outcome will occur, then the payout for betting on the underdog line will increase. Since determining “over” or “under" is a binary value, users will also have a heightened chance of witnessing financial returns. Several implications of sports betting include increased thrill and engagement when watching a game. Betting over/under is relatively straightforward and adds an extra layer of interest for users.
 
 Section 3: Methods 
 
