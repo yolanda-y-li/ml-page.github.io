@@ -2,7 +2,6 @@
 
 
 Final Report
-![image](https://github.com/yolanda-y-li/ml-page.github.io/assets/69774970/509e9f90-e691-47a3-b086-2b6f976cdb44)
 
 <img width="1272" alt="Screenshot 2024-04-02 at 10 48 00 PM" src="https://github.com/vinwu2/ml-group45-sp2024/assets/161073357/4cabbadc-39c7-4caa-9469-d30dddf93586">
 
